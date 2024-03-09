@@ -90,14 +90,13 @@ int main() {
     }
   }
   for (const auto& [city, temperature] : final_map) {
-    // fmt::println("############################################");
-    // fmt::print("City: {}\n", city);
-    // fmt::print("Max temperature: {}\n", temperature.max_temperature);
-    // fmt::print("Min temperature: {}\n", temperature.min_temperature);
-    // fmt::print("Total temperature: {}\n", temperature.total_temperature);
-    // fmt::print("Avg temperature: {}\n",
-    //            temperature.total_temperature /
-    //            temperature.temperature_count);
+    fmt::println("############################################");
+    fmt::print("City: {}\n", city);
+    fmt::print("Max temperature: {}\n", temperature.max_temperature);
+    fmt::print("Min temperature: {}\n", temperature.min_temperature);
+    fmt::print("Total temperature: {}\n", temperature.total_temperature);
+    fmt::print("Avg temperature: {}\n",
+               temperature.total_temperature / temperature.temperature_count);
   }
   fmt::print("Done\n");
   return 0;
