@@ -85,7 +85,8 @@ int main() {
         final_map[city].avg_temperature =
             final_map[city].total_temperature / chunk_count;
       } else {
-        final_map[city] = {temperature, temperature, temperature, temperature};
+        final_map[city] = {temperature, temperature, temperature, temperature,
+                           1};
       }
     }
   }
