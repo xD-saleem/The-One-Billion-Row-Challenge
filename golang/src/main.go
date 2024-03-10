@@ -55,7 +55,7 @@ type info struct {
 }
 
 func processFile(input *os.File) string {
-	m, err := readFileLineByLineIntoAMap(input)
+	m, err := readChunkByChunk(input)
 	if err != nil {
 		panic(err)
 	}
@@ -85,13 +85,14 @@ func processFile(input *os.File) string {
 	return stringsBuilder.String()[:stringsBuilder.Len()-2]
 }
 
-func readFileLineByLineIntoAMap(file *os.File) (*haxmap.Map[string, info], error) {
+func readChunkByChunk(file *os.File) (*haxmap.Map[string, info], error) {
 	const chunkSize = 64 * 1024 * 1024 // 64MB
 
 	m := haxmap.New[string, info]()
 
 	resultStream := make(chan map[string]info, 10)
 	chunkStream := make(chan []byte, 15)
+
 	var wg sync.WaitGroup
 
 	for i := 0; i < runtime.NumCPU()-1; i++ {
