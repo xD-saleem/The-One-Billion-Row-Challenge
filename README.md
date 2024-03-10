@@ -1,5 +1,6 @@
 # 1️⃣🐝🏎️ The One Billion Row Challenge
 
-[This](https://github.com/gunnarmorling/1brc) but in Golang.
+[This](https://github.com/gunnarmorling/1brc) but different langs
 
-Attempt 4 took 11.923 seconds to process 1 billion lines.
+Golang took 11.923 seconds to process 1 billion lines.
+C++ took 13.235 seconds to process 1 billion lines.
