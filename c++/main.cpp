@@ -7,8 +7,6 @@
 #include <sstream>
 #include <vector>
 
-int chunk_count = 0;
-
 struct CityTemperature {
   float max_temperature;
   float min_temperature;
@@ -23,7 +21,7 @@ std::map<std::string, float> process_chunk(const std::string& chunk) {
   std::map<std::string, float> my_map;
 
   while (std::getline(iss, line, '\n')) {
-    if (line.empty()) {
+    if (line.empty() || line == "\n" || line == "") {
       continue;
     }
 
@@ -82,8 +80,6 @@ int main() {
             std::min(final_map[city].min_temperature, temperature);
         final_map[city].total_temperature += temperature;
         final_map[city].temperature_count++;
-        final_map[city].avg_temperature =
-            final_map[city].total_temperature / chunk_count;
       } else {
         final_map[city] = {temperature, temperature, temperature, temperature,
                            1};
