@@ -31,7 +31,7 @@ func main() {
 	pprof.WriteHeapProfile(f)
 	defer f.Close()
 
-	file, err := os.Open("../../10k.txt")
+	file, err := os.Open("../../1bill.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -63,7 +63,7 @@ func processFile(input *os.File) string {
 	resultArr := make([]result, m.Len())
 	var count int
 
-	m.ForEach(func(city string, value info) bool {
+	m.ForEach(func(city string, value *info) bool {
 		resultArr[count] = result{
 			city: city,
 			min:  round(float64(value.min) / 10.0),
@@ -85,10 +85,10 @@ func processFile(input *os.File) string {
 	return stringsBuilder.String()[:stringsBuilder.Len()-2]
 }
 
-func readChunkByChunk(file *os.File) (*haxmap.Map[string, info], error) {
+func readChunkByChunk(file *os.File) (*haxmap.Map[string, *info], error) {
 	const chunkSize = 64 * 1024 * 1024 // 64MB
 
-	m := haxmap.New[string, info]()
+	m := haxmap.New[string, *info]()
 
 	resultStream := make(chan map[string]info, 10)
 	chunkStream := make(chan []byte, 15)
@@ -151,7 +151,7 @@ func readChunkByChunk(file *os.File) (*haxmap.Map[string, info], error) {
 				}
 				m.Set(city, val)
 			} else {
-				m.Set(city, info)
+				m.Set(city, &info)
 			}
 		}
 	}
